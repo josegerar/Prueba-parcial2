@@ -49,4 +49,12 @@
         android:layout_below="@id/procesarImagen"
         android:layout_centerHorizontal="true"
         android:text="Resultado: " />
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textResult"
+        android:layout_gravity="center|center_vertical|center_horizontal"
+        android:indeterminate="true"
+        android:visibility="gone" />
 </RelativeLayout>

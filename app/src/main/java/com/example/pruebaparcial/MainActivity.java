@@ -11,10 +11,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements IMLController {
 
+    private ProgressBar loadingProgressBar;
     private static final int PICK_IMAGE = 100;
     Button btnimagen;
     Button btnprocesar;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements IMLController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadingProgressBar = findViewById(R.id.loading);
 
         btnprocesar = findViewById(R.id.procesarImagen);
 
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements IMLController {
                 BitmapDrawable drawable = (BitmapDrawable) imagen.getDrawable();
                 bitmap = drawable.getBitmap();
                 if (bitmap != null) {
+                    loadingProgressBar.setVisibility(View.VISIBLE);
                     mlController.send_image(bitmap);
                 }
             }
@@ -83,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements IMLController {
             Bundle bundle = new Bundle();
             bundle.putFloatArray("floats", floats);
             intent.putExtras(bundle);
+            loadingProgressBar.setVisibility(View.GONE);
             startActivity(intent);
         }
         System.out.println(message);
